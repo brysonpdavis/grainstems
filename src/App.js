@@ -73,7 +73,7 @@ function App() {
       <h3>grain size</h3>
       <LimitedKnob 
         skin={skins.s12}
-        change={{change: (v) => {player.grainSize = 20 / v}}}
+        change={{change: (v) => {player.grainSize = v / 20}}}
         style = {{width: 100, height: 100}}  
         startval = {10}
         min={1}
