@@ -1,0 +1,12 @@
+h1, h2, h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #c0f3fc;
+}
+
+h3 {
+    font-weight: normal;
+}
+
+body {
+    background-color: #383838;
+}

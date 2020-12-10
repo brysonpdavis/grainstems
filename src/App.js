@@ -7,7 +7,7 @@ import LimitedKnob from './LimitedKnob'
 function App() {
   const[isLoaded, setIsLoaded] = useState(false)
 
-  const filter = new Tone.Filter(0, "lowpass", -24).toDestination()
+  const filter = new Tone.Filter((2 ** 15), "lowpass", -24).toDestination()
 
   const player = new Tone.GrainPlayer({
     onload: () => setIsLoaded(true),
@@ -53,7 +53,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div font-family="helvetica">
       <h2>Grainstems</h2>
       <h3>toy granular synth</h3>
       <button disabled={!isLoaded} onClick={startPlayer}>start</button>
