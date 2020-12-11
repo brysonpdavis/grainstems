@@ -1,5 +1,5 @@
 import * as Tone from 'tone';
-import piano from './stems/piano.wav'
+import piano from './stems/piano3.wav'
 import React, {useState} from 'react'
 import * as skins from 'react-rotary-knob-skin-pack'
 import LimitedKnob from './LimitedKnob'
@@ -27,7 +27,7 @@ function App() {
   }
 
   const stopPlayer = () => {
-    player.stop("+0.5")
+    player.stop("+0.1")
   }
 
   const tuneUp = () => {
@@ -101,6 +101,7 @@ function App() {
         skin={skins.s12}
         change={{change: (v) => {player.detune = v}}}
         style = {{width: 100, height: 100}}  
+        startval={0}
         min={-3600}
         max={3600}
         maxDistance={600}
