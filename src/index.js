@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import AudioContainer from './components/AudioContainer';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AudioContainer />
   </React.StrictMode>,
   document.getElementById('root')
 );
