@@ -76,7 +76,7 @@ const App = ({audioObject}) => {
               <tr>
                 <TableDataLimitedKnob 
                   text={"grain size"}
-                  skin={skins.s12}
+                  skin={skins.s16}
                   change={{change: (v) => {audioObject.player.grainSize = v / 20}}}
                   style = {{width: 100, height: 100}}  
                   startval = {10}
@@ -89,7 +89,7 @@ const App = ({audioObject}) => {
                 />
                 <TableDataLimitedKnob 
                   text={"overlap"}
-                  skin={skins.s12}
+                  skin={skins.s16}
                   change={{change: (v) => {audioObject.player.overlap = audioObject.player.grainSize * v / 10}}}
                   style = {{width: 100, height: 100}}  
                   startval = {1}
@@ -102,7 +102,7 @@ const App = ({audioObject}) => {
                 />
                 <TableDataLimitedKnob 
                   text={"tuning"}
-                  skin={skins.s12}
+                  skin={skins.s16}
                   change={{change: (v) => {audioObject.player.detune = v}}}
                   style = {{width: 100, height: 100}}  
                   startval={0}
@@ -117,7 +117,7 @@ const App = ({audioObject}) => {
               <tr>
                 <TableDataLimitedKnob 
                   text={"loop start"}
-                  skin={skins.s12}
+                  skin={skins.s16}
                   change={{change: (v) => {audioObject.player.loopStart = v}}}
                   style = {{width: 100, height: 100}}  
                   startval = {0}
@@ -130,7 +130,7 @@ const App = ({audioObject}) => {
                 />
                 <TableDataLimitedKnob 
                   text={"loop end"}
-                  skin={skins.s12}
+                  skin={skins.s16}
                   change={{change: (v) => {audioObject.player.loopEnd = v}}}
                   style = {{width: 100, height: 100}}  
                   startval = {10}
@@ -143,7 +143,7 @@ const App = ({audioObject}) => {
                 />
                 <TableDataLimitedKnob 
                   text={"filter cutoff"}
-                  skin={skins.s12}
+                  skin={skins.s16}
                   change={{change: (v) => {audioObject.filter.frequency.rampTo(2 ** (v + 5))}}}
                   style = {{width: 100, height: 100}}  
                   startval = {10}

@@ -20,3 +20,24 @@ body {
     letter-spacing: 4px;
     font-size: 32px;
 }
+
+.frequencyBands {
+    padding: 1px;
+    margin: 1px;
+    transform: rotatex(180deg);
+    transform-origin: top;
+    flex: 1;
+    float: left;
+    height: 0px;
+}
+
+table {
+    margin: auto;
+}
+
+.visualizer {
+    height: 400px;
+}
+
+
+  

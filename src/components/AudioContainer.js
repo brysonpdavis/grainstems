@@ -3,11 +3,12 @@ import piano1 from '../stems/piano1.wav'
 import React, {useState} from 'react'
 import setupNodes from '../services/setupNodes'
 import App from './App'
+import Visualizer from './Visualizer'
 
 const AudioContainer = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const {gain, envelope, filter, player} = setupNodes({
+  const {fft, gain, envelope, filter, player} = setupNodes({
     onload: () => setIsLoaded(true),
     detune:0,
     url: piano1,
@@ -26,6 +27,7 @@ const AudioContainer = () => {
     filter: filter,
     envelope: envelope,
     gain: gain,
+    fft: fft,
 
     setEnvelopeEnabled: null,
     envelopeEnabled: null,
@@ -98,18 +100,31 @@ const AudioContainer = () => {
         //disable envelope
         this.filter.disconnect(this.envelope, 0, 0)
         this.envelope.disconnect(this.gain, 0, 0)
-        this.player.chain(this.filter, this.gain)
+        this.player.chain(this.filter, this.gain, this.fft)
       }
       else {
         //enable envelope
         this.filter.disconnect(gain)
-        this.player.chain(this.filter, this.envelope, this.gain)
+        this.player.chain(this.filter, this.envelope, this.gain, this.fft)
       }
       this.setEnvelopeEnabled(!this.envelopeEnabled)
+    },
+
+    getFFT : function() {
+      return this.fft.getValue()
     }
   };
 
-  return <span><App audioObject={audioObj} /></span>
+  let frequencyBandArray = [...Array(128).keys()]
+
+  return (
+    <span>
+      <App audioObject={audioObj} />
+      <Visualizer 
+        audioObject={audioObj}  
+        frequencyBandArray={frequencyBandArray}
+      />
+    </span>)
 
 }
 
