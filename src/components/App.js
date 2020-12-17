@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Paper} from '@material-ui/core'
 import piano1 from '../stems/piano1.wav'
 import piano2 from '../stems/piano2.wav'
 import piano3 from '../stems/piano3.wav'
@@ -36,7 +37,8 @@ const App = ({audioObject}) => {
 
 
     return (
-        <div>
+        <Paper elevation={4} style={{backgroundColor: '#383838', padding: '40px 80px 80px 80px'}}>
+        <div className={'interface'}>
           <h2 className={"title"}>grainstems</h2>
           <h3 className={"subtitle"}>a toy granular synth</h3>
           {
@@ -57,10 +59,10 @@ const App = ({audioObject}) => {
           <h3>{envelopeEnabled ? "turn off": "turn on"} envelope</h3>
           <button onClick={audioObject.toggleEnvelope} >_/\_</button>
           <br />
-          {envelopeEnabled ? noteAboutKeys : null}
           <br />
+          {envelopeEnabled ? noteAboutKeys : null}
           {envelopeEnabled ? keys : null}
-          <table style={{textAlign:"center"}}>
+          <table>
             <tbody>
               <tr>
                 <NewKnob 
@@ -95,7 +97,7 @@ const App = ({audioObject}) => {
                 />
                 <td>
                   <h3>reverse</h3>
-                  <button onClick={audioObject.setReverse} >~</button>
+                  <button onClick={audioObject.setReverse} style={{marginLeft: 'auto', marginRight: 'auto', display:'block', width: '50%'}}>~</button>
                 </td>
               </tr>
               <tr>
@@ -143,6 +145,7 @@ const App = ({audioObject}) => {
             </tbody>
           </table>
         </div>
+        </Paper>
     )
 }
 

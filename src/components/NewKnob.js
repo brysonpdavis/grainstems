@@ -42,7 +42,7 @@ const NewKnob = (props) => {
 
     let tdStyle = {
         padding: '16px 0 16px 0',
-        width: '200px',
+        width: `${diam * 2}px`,
         position: 'relative'
 
     }
@@ -56,27 +56,32 @@ const NewKnob = (props) => {
         transform: `rotate(calc(${rotation} * 1rad))`,
         transformOrigin: '50% 50%',
         overflow: 'visible',
+        boxShadow: `0 0 60px -20px ${lineColor}`,     
+        borderRadius: '50%',
+        width: 'min-content',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+
     }
 
-    let knobShadowStyle = {
-        position: 'relative',
-        display: 'block',
-        width: `${diam.toString()}px`,
-        height: `${diam.toString()}px`,
-        borderRadius: '50%',
-        content: '',
-        boxShadow: `0 0 60px -20px ${lineColor}`,      
-        padding: '0px',
-        marginBottom: '-40%',
-        zIndex: '-1'
-    }
+    // let knobShadowStyle = {
+    //     position: 'relative',
+    //     display: 'block',
+    //     width: `${diam.toString()}px`,
+    //     height: `${diam.toString()}px`,
+    //     borderRadius: '50%',
+    //     content: '',
+    //     boxShadow: `0 0 60px -20px ${lineColor}`,      
+    //     padding: '0px',
+    //     marginBottom: '-40%',
+    //     zIndex: '-1'
+    // }
 
     return (
         <td style={tdStyle}>
             <h3>{text}</h3> 
             <h3> {show(val)} {units}</h3>
             <div style={knobStyle} onPointerDown={pointerDown}>
-                <div style={knobShadowStyle}></div>
                 <svg overflow='visible' width={diam} height={diam}>
                     <g>
                         <ellipse 

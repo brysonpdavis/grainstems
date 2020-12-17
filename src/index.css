@@ -1,8 +1,9 @@
 ::selection {
-    background: rgba(0, 0, 0, 0)
+    background-color: transparent;
 }
 
 h1, h2, h3 {
+    margin-top: 0px;
     text-shadow: 0px 0px 10px #c0f3fcce;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #c0f3fc;
@@ -10,21 +11,26 @@ h1, h2, h3 {
 }
 
 body {
-    background-color: #383838;
+    background-color: #333;
+    user-select: none;
+}
+
+
+.interface {
+    text-align: left;
 }
 
 button {
     color: #c0f3fc;
     text-shadow: 0px 0px 10px #c0f3fcce;
     background: #666;
-    padding: '4px';
-    margin: '4px';
+    padding: 10px;
+    margin: 4px;
 }
 
 #root {
     display: flex;
     justify-content: center;
-    text-align: center;
 }
 
 .title {
@@ -45,6 +51,11 @@ button {
 
 table {
     margin: auto;
+    text-align: left;
+}
+
+li {
+    text-align: left;
 }
 
 .visualizer {
