@@ -1,0 +1,20 @@
+type Stem {
+    name: String!
+    url: String!
+    contributer: String
+    description: String
+    id: ID!
+}
+
+type Query {
+    allStems: [Stem!]! @resolver (name: "get_all_stems")
+}
+
+type Mutation {
+    addStem(
+        name: String!
+        url: String!
+        contributer: String
+        description: String
+    ) : Stem @resolver (name: "add_stem")
+}

@@ -1,9 +1,7 @@
 import React, {useState} from 'react'
 import {Paper} from '@material-ui/core'
-import piano1 from '../stems/piano1.wav'
-import piano2 from '../stems/piano2.wav'
-import piano3 from '../stems/piano3.wav'
 import NewKnob from './NewKnob'
+import FetchedStems from './FetchedStems'
 
 const App = ({audioObject}) => {
     const[envelopeEnabled, setEnvelopeEnabled] = useState(false)
@@ -35,7 +33,6 @@ const App = ({audioObject}) => {
         <h3>play synth with buttons</h3>
     ) 
 
-
     return (
         <Paper elevation={4} style={{backgroundColor: '#383838', padding: '40px 80px 80px 80px'}}>
         <div className={'interface'}>
@@ -51,9 +48,7 @@ const App = ({audioObject}) => {
           <br />
           <br />
           <h3>choose sample</h3>
-          <button onClick={()=>audioObject.resetGrainPlayer(piano1)}>x</button>
-          <button onClick={()=>audioObject.resetGrainPlayer(piano2)}>y</button>
-          <button onClick={()=>audioObject.resetGrainPlayer(piano3)}>z</button>
+          <FetchedStems audioObject={audioObject} />
           <br />
           <br />
           <h3>{envelopeEnabled ? "turn off": "turn on"} envelope</h3>
