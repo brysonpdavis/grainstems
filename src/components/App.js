@@ -2,9 +2,11 @@ import React, {useState} from 'react'
 import {Paper} from '@material-ui/core'
 import NewKnob from './NewKnob'
 import FetchedStems from './FetchedStems'
+import UploadForm from './UploadForm'
 
 const App = ({audioObject}) => {
     const[envelopeEnabled, setEnvelopeEnabled] = useState(false)
+    const[uploadEnabled, setUploadEnabled] = useState(false)
     const[isPlaying, setIsPlaying] = useState(false)
 
     audioObject.setEnvelopeEnabled = setEnvelopeEnabled
@@ -18,6 +20,8 @@ const App = ({audioObject}) => {
     }    
 
     const keys = (
+      <>
+      <h3>play synth with buttons</h3>
       <div>
         <button onClick={audioObject.playA}>A</button>
         <button onClick={audioObject.playB}>B</button>
@@ -27,11 +31,8 @@ const App = ({audioObject}) => {
         <button onClick={audioObject.playF}>F</button>
         <button onClick={audioObject.playG}>G</button>
       </div>
+      </>
     )
-
-    const noteAboutKeys = (
-        <h3>play synth with buttons</h3>
-    ) 
 
     return (
         <Paper elevation={4} style={{backgroundColor: '#383838', padding: '40px 80px 80px 80px'}}>
@@ -48,14 +49,16 @@ const App = ({audioObject}) => {
           <br />
           <br />
           <h3>choose sample</h3>
-          <FetchedStems audioObject={audioObject} />
+          <button onClick={() => setUploadEnabled(!uploadEnabled)}>{!uploadEnabled?"upload a sample":"select a sample"}</button>
+          {
+            uploadEnabled ? <UploadForm /> : <FetchedStems audioObject={audioObject} />
+          }
           <br />
           <br />
           <h3>{envelopeEnabled ? "turn off": "turn on"} envelope</h3>
           <button onClick={audioObject.toggleEnvelope} >_/\_</button>
           <br />
           <br />
-          {envelopeEnabled ? noteAboutKeys : null}
           {envelopeEnabled ? keys : null}
           <table>
             <tbody>

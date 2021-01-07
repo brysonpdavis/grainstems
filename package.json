@@ -16,6 +16,7 @@
     "nexusui": "^2.1.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-dropzone": "^11.2.4",
     "react-rotary-knob": "^1.1.8",
     "react-rotary-knob-skin-pack": "^1.0.2",
     "react-scripts": "4.0.1",
