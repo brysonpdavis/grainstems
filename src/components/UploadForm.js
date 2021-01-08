@@ -2,15 +2,15 @@ import React, {useState} from 'react'
 
 const UploadForm = () => {
     const [_name, setName] = useState('')
-    const [audioFile, setAudioFile] = useState({})
+    // const [audioFile, setAudioFile] = useState({})
     const [description, setDescription] = useState('')
     const [contributor, setContributor] = useState('')
 
-    const encode = (data) => {
-        return Object.keys(data)
-            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-            .join("&")
-    }
+    // const encode = (data) => {
+    //     return Object.keys(data)
+    //         .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    //         .join("&")
+    // }
     
     // {
     //     const formData = new FormData()
@@ -20,30 +20,30 @@ const UploadForm = () => {
     //     return formData
     // }
 
-    const handleSubmit = event => {
-        console.log(event)
-        if (true) {
-            const data = {
-                "form-name": "upload", 
-                "_name": _name, 
-                "contributor": contributor, 
-                "description": description, 
-                "_file" : audioFile
-            }
+    // const handleSubmit = event => {
+    //     console.log(event)
+    //     if (audioFile !== {} && _name !== '') {
+    //         const data = {
+    //             "form-name": "upload", 
+    //             "_name": _name, 
+    //             "contributor": contributor, 
+    //             "description": description, 
+    //             "_file" : audioFile
+    //         }
             
-            //send to netlify client, which forwards to aws then to fauna?
+    //         //send to netlify client, which forwards to aws then to fauna?
 
-            fetch("/", {
-                method: "POST",
-                headers: {"Content-Type": "multipart/form-data"},
-                body: encode(data)
-            })
-            .then(() => console.log("Submission successful"))
-            .catch(error => console.log("Submission failed", error))
-        }  
+    //         fetch("/", {
+    //             method: "POST",
+    //             headers: {"Content-Type": "multipart/form-data"},
+    //             body: encode(data)
+    //         })
+    //         .then(() => console.log("Submission successful"))
+    //         .catch(error => console.log("Submission failed", error))
+    //     }  
 
-        event.preventDefault()
-    }
+    //     event.preventDefault()
+    // }
 
     const handleChange = e => {
         const {name, value} = e.target
@@ -56,13 +56,13 @@ const UploadForm = () => {
         if (name === 'contributor'){
             return setContributor(value)
         }
-        if (name === '_file'){
-            return setAudioFile(value)
-        }
+        // if (name === '_file'){
+        //     return setAudioFile(value)
+        // }
     }
 
     return (
-        <form name="upload" method="POST" onSubmit={handleSubmit}>
+        <form name="upload" method="POST" >
             <input type="hidden" name="form-name" value="upload" />
             <p>
                 <label>
