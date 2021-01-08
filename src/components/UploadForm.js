@@ -54,7 +54,7 @@ const UploadForm = () => {
     }
 
     return (
-        <form name="upload" method="post" netlify-data="true" onSubmit={handleSubmit}>
+        <form name="upload" method="post" data-netlify="true" onSubmit={handleSubmit}>
             <input type="hidden" name="form-name" value="upload" />
             <label>
                 <p>
