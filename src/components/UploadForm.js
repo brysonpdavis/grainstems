@@ -7,12 +7,18 @@ const UploadForm = () => {
     const [contributor, setContributor] = useState('')
 
     const encode = (data) => {
-        const formData = new FormData()
-        Object.keys(data).forEach(k=>{
-            formData.append(k, data[k])
-        })
-        return formData
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&")
     }
+    
+    // {
+    //     const formData = new FormData()
+    //     Object.keys(data).forEach(k=>{
+    //         formData.append(k, data[k])
+    //     })
+    //     return formData
+    // }
 
     const handleSubmit = event => {
         console.log(event)
@@ -56,7 +62,7 @@ const UploadForm = () => {
     }
 
     return (
-        <form name="upload" onSubmit={handleSubmit} enctype="multipart/form-data">
+        <form name="upload" onSubmit={handleSubmit}> {/* enctype="multipart/form-data" method="POST" */}
             <input type="hidden" name="form-name" value="upload" />
             <p>
                 <label>
