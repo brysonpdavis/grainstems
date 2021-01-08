@@ -7,22 +7,28 @@ const UploadForm = () => {
     const [contributor, setContributor] = useState('')
 
     const encode = (data) => {
-        const formData = new FormData()
-        Object.keys(data).forEach(k=>{
-            formData.append(k, data[k])
-        })
-        return formData
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&")
     }
+    
+    // {
+    //     const formData = new FormData()
+    //     Object.keys(data).forEach(k=>{
+    //         formData.append(k, data[k])
+    //     })
+    //     return formData
+    // }
 
     const handleSubmit = event => {
         if (audioFile !== {} && name !== "") {
-            const data = {"form-name" : "upload", name, description, contributor, audioFile}
+            const data = {name, description, contributor, "file" : audioFile}
             
             //send to netlify client, which forwards to aws then to fauna?
 
             fetch("/", {
                 method: "POST",
-                headers: {"Content-Type": "multipart/form-data"},
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
                 body: encode(data)
             })
             .then(() => console.log("Submission successful"))
@@ -48,7 +54,7 @@ const UploadForm = () => {
     }
 
     return (
-        <form name="upload" onSubmit={handleSubmit}>
+        <form name="upload" method="post" netlify-data="true" onSubmit={handleSubmit}>
             <input type="hidden" name="form-name" value="upload" />
             <label>
                 <p>
