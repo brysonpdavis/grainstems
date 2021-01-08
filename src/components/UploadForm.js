@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 const UploadForm = () => {
     const [_name, setName] = useState('')
-    // const [audioFile, setAudioFile] = useState({})
+    const [audioFile, setAudioFile] = useState({})
     const [description, setDescription] = useState('')
     const [contributor, setContributor] = useState('')
 
@@ -28,14 +28,14 @@ const UploadForm = () => {
                 "_name": _name, 
                 "contributor": contributor, 
                 "description": description, 
-                // "_file" : audioFile
+                "_file" : audioFile
             }
             
             //send to netlify client, which forwards to aws then to fauna?
 
             fetch("/", {
                 method: "POST",
-                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                headers: {"Content-Type": "multipart/form-data"},
                 body: encode(data)
             })
             .then(() => console.log("Submission successful"))
@@ -56,9 +56,9 @@ const UploadForm = () => {
         if (name === 'contributor'){
             return setContributor(value)
         }
-        // if (name === '_file'){
-        //     return setAudioFile(value)
-        // }
+        if (name === '_file'){
+            return setAudioFile(value)
+        }
     }
 
     return (
@@ -79,11 +79,11 @@ const UploadForm = () => {
                     description : <input type="text" name="description" value={description} onChange={handleChange} />
                 </p>
             </label>
-            {/* <label>
+            <label>
                 <p>
                     file : <input type="file" name="_file" className="custom-file-input" onChange={handleChange}></input>
                 </p>
-            </label> */}
+            </label>
             <button type="submit">upload</button>
         </form>
     )
