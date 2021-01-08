@@ -62,7 +62,7 @@ const UploadForm = () => {
     }
 
     return (
-        <form name="upload" method="POST" >
+        <form name="upload" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="form-name" value="upload" />
             <p>
                 <label>
