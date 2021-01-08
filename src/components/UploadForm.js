@@ -21,7 +21,7 @@ const UploadForm = () => {
     // }
 
     const handleSubmit = event => {
-        if (audioFile !== {} && name !== "") {
+        if (true) {
             const data = {name, description, contributor, "file" : audioFile}
             
             //send to netlify client, which forwards to aws then to fauna?
@@ -54,13 +54,13 @@ const UploadForm = () => {
     }
 
     return (
-        <form name="upload" method="post" data-netlify="true" onSubmit={handleSubmit}>
+        <form name="upload" action="POST">
             <input type="hidden" name="form-name" value="upload" />
-            <label>
-                <p>
+            <p>
+                <label>
                     sample name : <input type="text" name="name" value={name} onChange={handleChange} />
-                </p>
-            </label>
+                </label>
+            </p>
             <label>
                 <p>
                     name of contributor : <input type="text" name="contributor" value={contributor} onChange={handleChange} ></input>
