@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Visualizer = ({audioObject, frequencyBandArray}) => {
-
     const classes = useStyles()
 
     for(let key in audioObject) {
@@ -66,7 +65,6 @@ const Visualizer = ({audioObject, frequencyBandArray}) => {
             )}
         </div>
     )
-
 }
 
 export default Visualizer
