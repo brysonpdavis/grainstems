@@ -7,15 +7,13 @@ exports.handler = async (event, context) => {
     })
 
     console.log('aws key : ', process.env.MY_AWS_ACCESS_KEY_ID, 'aws secret : ', process.env.MY_AWS_SECRET_ACCESS_KEY)
-
-    console.log('event.body.payload : ', event.body.payload)
     
     const data = JSON.parse(event.body).payload.data
 
     console.log(data)
 
     const fileName = data._file.filename
-    const fileType = dtaa._file.type
+    const fileType = data._file.type
     const url = data._file.url
     const AWSFileKey = `${Math.floor(Math.random() * 10000000).toString()}-${fileName}`
     const fileToUpload = await fetch(url).then(r => r.blob()).then(b => new File([b], AWSFileKey))
