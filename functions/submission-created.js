@@ -8,7 +8,9 @@ exports.handler = async (event, context) => {
 
     console.log('aws key : ', process.env.MY_AWS_ACCESS_KEY_ID, 'aws secret : ', process.env.MY_AWS_SECRET_ACCESS_KEY)
 
-    const data = event.body.payload.data
+    console.log('event.body : ', event.body)
+    
+    const data = event.body.data
 
     console.log(data)
 
