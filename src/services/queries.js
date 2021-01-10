@@ -1,4 +1,4 @@
-import {client, q} from '../config/db'
+import {client, q} from './db'
 
 const getAllStems = client
     .query(q.Map(q.Paginate(q.Match(q.Index("all_stems"))), q.Lambda("X", q.Get(q.Var("X")))))

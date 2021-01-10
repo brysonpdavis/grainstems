@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import getAllStems from '../api/queries'
+import getAllStems from '../services/queries'
 
 const FetchedStems = ({audioObject}) => {
     const[stemsList, setStemsList] = useState([])

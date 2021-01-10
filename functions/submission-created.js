@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
     // uploadParams = {Bucket: 'grainstems', Key: '', Body: ''}
     // file = event.
 
-    console.log(event.body)
+    console.log('multiple logs')
+
+    console.log('event.body: ', event.body)
 }
-
-
