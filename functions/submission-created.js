@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
 
     console.log('event.body : ', event.body)
     
-    const data = event.body.data
+    const data = event.body.payload.data
 
     console.log(data)
 
