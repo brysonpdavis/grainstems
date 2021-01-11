@@ -23,7 +23,8 @@ exports.handler = async (event, context) => {
     console.log('fetched', fetched)
     // const response = await fetched.json()
     // console.log('response', response.toString())
-    const fileToUpload = await fetched.blob()
+    const blob = await fetched.blob()
+    const fileToUpload = await blob.arrayBuffer()
     console.log(fileToUpload.toString())
         
     const uploadParams = {
