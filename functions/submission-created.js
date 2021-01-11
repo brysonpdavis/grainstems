@@ -31,5 +31,6 @@ exports.handler = async (event, context) => {
             body: fileToUpload
         }
     ))
-    .then(r => console.log(result))
+    .then(r => console.log(r))
+    .catch(error => console.log(error))
 }
