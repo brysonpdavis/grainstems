@@ -1,5 +1,6 @@
 const AWS = require("aws-sdk")
 const fetch = require("node-fetch")
+const fs = require('fs')
 
 exports.handler = async (event, context) => {
     const s3 = new AWS.S3({
@@ -17,20 +18,22 @@ exports.handler = async (event, context) => {
     const fileType = data._file.type
     const url = data._file.url
     const AWSFileKey = `${Math.floor(Math.random() * 10000000).toString()}-${fileName}`
-    const fileToUpload = await fetch(url).then(r => r.blob()).then(b => new File([b], AWSFileKey))
+    const fileToUpload = await fetch(url).then(r => r.blob())
         
     const uploadParams = {
         Bucket: 'grainstems', 
         Key: AWSFileKey, 
-        Expires: 300,
-        ContentType: fileType
+        ContentType: fileType,
+        Body: fileToUpload
     }
 
-    const uploadURL = await s3.getSignedUrlPromise('putObject', uploadParams)
-    const result = await fetch (uploadURL, {
-        method: 'PUT',
-        body: fileToUpload
-    })
+
+    result = await s3.upload(uploadParams)
+    // const uploadURL = await s3.getSignedUrlPromise('putObject', uploadParams)
+    // const result = await fetch (uploadURL, {
+    //     method: 'PUT',
+    //     body: fileToUpload
+    // })
 
     console.log(result)
 }
