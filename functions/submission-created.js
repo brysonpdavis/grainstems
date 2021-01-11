@@ -26,8 +26,8 @@ exports.handler = async (event, context) => {
 
     const upload = s3.upload(uploadParams)
     const result = upload.promise()
-    console.log('')
-    result.then(r => console.log(r))
+    console.log('promise', result)
+    result.then(r => console.log('promise result: ', r))
 
     // s3.getSignedUrlPromise('putObject', uploadParams)
     // .then(uploadURL => 
