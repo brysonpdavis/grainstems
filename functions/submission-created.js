@@ -30,31 +30,25 @@ exports.handler = async (event, context) => {
         
     const uploadParams = {
         Bucket: 'grainstems', 
-        Key: fileName, 
+        Key: AWSFileKey, 
         ContentType: fileType,
         Body: fileToUpload
     }
 
+    try {
+        var upload = new AWS.S3.ManagedUpload({
+            params: uploadParams
+        })    
 
-    var upload = new AWS.S3.ManagedUpload({
-        params: uploadParams
-    })
+        var response = await upload.promise()
 
-    var promise = await upload.promise()
-    console.log('promise', promise)
-    promise.then(r => console.log('promise result: ', r))
+        console.log('response', response)
+    
+        if (error) return { statusCode: 500, body: JSON.stringify(error) }
 
-    return {
-        
+    return { statusCode: 200, body: JSON.stringify(result) }
+
+    } catch (e) {
+        return { statusCode: 500, body: e.message }
     }
-
-    // s3.getSignedUrlPromise('putObject', uploadParams)
-    // .then(uploadURL => 
-    //     fetch (uploadURL, {
-    //         method: 'PUT',
-    //         body: fileToUpload
-    //     }
-    // ))
-    // .then(r => console.log(r))
-    // .catch(error => console.log(error))
 }
