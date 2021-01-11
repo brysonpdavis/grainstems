@@ -19,18 +19,20 @@ exports.handler = async (event, context) => {
         Bucket: 'grainstems', 
         Key: AWSFileKey, 
         ContentType: fileType,
-        // Body: fileToUpload
+        ACL: 'public-read',
+        Body: fileToUpload
     }
 
 
-    // result = await s3.upload(uploadParams)
-    s3.getSignedUrlPromise('putObject', uploadParams)
-    .then(uploadURL => 
-        fetch (uploadURL, {
-            method: 'PUT',
-            body: fileToUpload
-        }
-    ))
-    .then(r => console.log(r))
-    .catch(error => console.log(error))
+    result = await s3.upload(uploadParams)
+    console.log(JSON.parse(result))
+    // s3.getSignedUrlPromise('putObject', uploadParams)
+    // .then(uploadURL => 
+    //     fetch (uploadURL, {
+    //         method: 'PUT',
+    //         body: fileToUpload
+    //     }
+    // ))
+    // .then(r => console.log(r))
+    // .catch(error => console.log(error))
 }
