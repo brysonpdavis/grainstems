@@ -38,7 +38,7 @@ exports.handler = async (event, context) => {
         params: uploadParams
     })
 
-    var promise = upload.promise()
+    var promise = await upload.promise()
     console.log('promise', promise)
     promise.then(r => console.log('promise result: ', r))
 
