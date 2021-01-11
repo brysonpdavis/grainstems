@@ -19,7 +19,8 @@ exports.handler = async (event, context) => {
     const fileType = data._file.type
     const url = data._file.url
     const AWSFileKey = `${Math.floor(Math.random() * 10000000).toString()}-${fileName}`
-    const fileToUpload = await fetch(url).then(r => r.blob())
+    const fetched = await fetch(url)
+    const fileToUpload = fetched.blob()
     console.log(JSON.stringify(fileToUpload))
         
     const uploadParams = {
