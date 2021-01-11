@@ -21,9 +21,9 @@ exports.handler = async (event, context) => {
     const AWSFileKey = `${Math.floor(Math.random() * 10000000).toString()}-${fileName}`
     const fetched = await fetch(url)
     console.log('fetched', fetched)
-    const response = await fetched.json()
-    console.log('response', response.toString())
-    const fileToUpload = await response.blob()
+    // const response = await fetched.json()
+    // console.log('response', response.toString())
+    const fileToUpload = await fetched.blob()
     console.log(fileToUpload.toString())
         
     const uploadParams = {
