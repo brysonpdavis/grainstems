@@ -1,6 +1,6 @@
 import * as Tone from 'tone'
 
-const setupNodes = (playerProps) => {
+const setupTone = (playerProps) => {
     const fft = new Tone.FFT(128)
 
     const gain = new Tone.Gain(1)
@@ -21,7 +21,7 @@ const setupNodes = (playerProps) => {
     return {fft, gain, envelope, filter, player}
 }
 
-export default setupNodes
+export default setupTone
 
 
 

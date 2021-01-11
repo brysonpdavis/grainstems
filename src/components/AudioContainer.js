@@ -1,14 +1,14 @@
 import * as Tone from 'tone'
 import piano1 from '../stems/piano1.wav'
 import React, {useState} from 'react'
-import setupNodes from '../services/setupNodes'
+import setupTone from '../services/setupTone'
 import App from './App'
 import Visualizer from './Visualizer'
 
 const AudioContainer = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const {fft, gain, envelope, filter, player} = setupNodes({
+  const {fft, gain, envelope, filter, player} = setupTone({
     onload: () => setIsLoaded(true),
     detune:0,
     url: piano1,

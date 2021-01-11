@@ -1,6 +1,5 @@
 const AWS = require("aws-sdk")
 const fetch = require("node-fetch")
-const fs = require('fs')
 
 exports.handler = async (event, context) => {
     AWS.config.update({
@@ -45,6 +44,8 @@ exports.handler = async (event, context) => {
         console.log('response', response)
     
         if (error) return { statusCode: 500, body: JSON.stringify(error) }
+
+        // ADD FAUNADB MUTATION HERE
 
     return { statusCode: 200, body: JSON.stringify(result) }
 
