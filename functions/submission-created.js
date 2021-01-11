@@ -24,15 +24,18 @@ exports.handler = async (event, context) => {
     }
 
 
-    // result = await s3.upload(uploadParams)
-    // console.log(JSON.stringify(result))
-    s3.getSignedUrlPromise('putObject', uploadParams)
-    .then(uploadURL => 
-        fetch (uploadURL, {
-            method: 'PUT',
-            body: fileToUpload
-        }
-    ))
-    .then(r => console.log(r))
-    .catch(error => console.log(error))
+    const upload = s3.upload(uploadParams)
+    const result = upload.promise()
+
+    result.then(r => console.log(JSON.stringify(r)))
+
+    // s3.getSignedUrlPromise('putObject', uploadParams)
+    // .then(uploadURL => 
+    //     fetch (uploadURL, {
+    //         method: 'PUT',
+    //         body: fileToUpload
+    //     }
+    // ))
+    // .then(r => console.log(r))
+    // .catch(error => console.log(error))
 }
