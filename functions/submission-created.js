@@ -20,8 +20,9 @@ exports.handler = async (event, context) => {
     const url = data._file.url
     const AWSFileKey = `${Math.floor(Math.random() * 10000000).toString()}-${fileName}`
     const fetched = await fetch(url)
+    console.log('fetched', fetched)
     const fileToUpload = fetched.blob()
-    console.log(JSON.stringify(fileToUpload))
+    console.log(fileToUpload.toString())
         
     const uploadParams = {
         Bucket: 'grainstems', 
