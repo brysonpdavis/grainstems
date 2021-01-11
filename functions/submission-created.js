@@ -7,13 +7,8 @@ exports.handler = async (event, context) => {
         accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY,
     })
-
-    console.log('aws key : ', process.env.MY_AWS_ACCESS_KEY_ID, 'aws secret : ', process.env.MY_AWS_SECRET_ACCESS_KEY)
     
     const data = JSON.parse(event.body).payload.data
-
-    console.log(data)
-
     const fileName = data._file.filename
     const fileType = data._file.type
     const url = data._file.url
@@ -24,16 +19,16 @@ exports.handler = async (event, context) => {
         Bucket: 'grainstems', 
         Key: AWSFileKey, 
         ContentType: fileType,
-        Body: fileToUpload
+        // Body: fileToUpload
     }
 
 
-    result = await s3.upload(uploadParams)
-    // const uploadURL = await s3.getSignedUrlPromise('putObject', uploadParams)
-    // const result = await fetch (uploadURL, {
-    //     method: 'PUT',
-    //     body: fileToUpload
-    // })
+    // result = await s3.upload(uploadParams)
+    const uploadURL = await s3.getSignedUrlPromise('putObject', uploadParams)
+    const result = await fetch (uploadURL, {
+        method: 'PUT',
+        body: fileToUpload
+    })
 
     console.log(result)
 }
