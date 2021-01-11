@@ -26,7 +26,7 @@ exports.handler = async (event, context) => {
     const blob = await fetched.blob()
     const arrayBufferBlob = await blob.arrayBuffer()
     const fileToUpload = Buffer.from(arrayBufferBlob)
-    console.log(fileToUpload.toString())
+    // console.log(fileToUpload.toString())
         
     const uploadParams = {
         Bucket: 'grainstems', 
