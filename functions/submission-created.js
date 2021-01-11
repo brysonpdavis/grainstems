@@ -1,4 +1,5 @@
 const AWS = require("aws-sdk")
+const fetch = require("node-fetch")
 
 exports.handler = async (event, context) => {
     const s3 = new AWS.S3({
