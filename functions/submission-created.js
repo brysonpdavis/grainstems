@@ -6,6 +6,7 @@ exports.handler = async (event, context) => {
     const s3 = new AWS.S3({
         accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY,
+        region: 'us-east-1'
     })
     
     const data = JSON.parse(event.body).payload.data
@@ -17,17 +18,16 @@ exports.handler = async (event, context) => {
         
     const uploadParams = {
         Bucket: 'grainstems', 
-        Key: AWSFileKey, 
+        Key: fileName, 
         ContentType: fileType,
-        ACL: 'public-read',
         Body: fileToUpload
     }
 
 
-    const upload = s3.upload(uploadParams)
+    const upload = AWS.S3.ManagedUpload(uploadParams)
     const result = upload.promise()
 
-    result.then(r => console.log(JSON.stringify(r)))
+    result.then(r => console.log(r))
 
     // s3.getSignedUrlPromise('putObject', uploadParams)
     // .then(uploadURL => 
