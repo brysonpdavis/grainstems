@@ -3,11 +3,16 @@ const fetch = require("node-fetch")
 const fs = require('fs')
 
 exports.handler = async (event, context) => {
-    const s3 = new AWS.S3({
-        accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY,
-        region: 'us-east-1'
+    AWS.config.update({
+        region: 'us-east-1',
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: process.env.MY_AWS_COGNITO_ID
+        })
     })
+    
+    // const s3 = new AWS.S3({
+    //     params: { Bucket: 'grainstems' }
+    // })
     
     const data = JSON.parse(event.body).payload.data
     const fileName = data._file.filename
@@ -25,10 +30,13 @@ exports.handler = async (event, context) => {
     }
 
 
-    const upload = s3.upload(uploadParams)
-    const result = upload.promise()
-    console.log('promise', result)
-    result.then(r => console.log('promise result: ', r))
+    var upload = new AWS.S3.ManagedUpload({
+        params: uploadParams
+    })
+
+    var promise = upload.promise()
+    console.log('promise', promise)
+    promise.then(r => console.log('promise result: ', r))
 
     return {
         
