@@ -1,5 +1,5 @@
 import * as Tone from 'tone'
-import piano1 from '../stems/piano1.wav'
+import drums from '../stems/drums1.wav'
 import React, {useState} from 'react'
 import setupTone from '../services/setupTone'
 import App from './App'
@@ -11,11 +11,11 @@ const AudioContainer = () => {
   const {fft, gain, envelope, filter, player} = setupTone({
     onload: () => setIsLoaded(true),
     detune:0,
-    url: piano1,
+    url: drums,
     mute: false,
     loop:true,
-    reverse: true,
-    grainSize:0.05,
+    reverse: false,
+    grainSize:0.5,
     overlap:0.01,
     playbackRate:1,
   })
@@ -29,8 +29,8 @@ const AudioContainer = () => {
     gain: gain,
     fft: fft,
 
-    setEnvelopeEnabled: null,
-    envelopeEnabled: null,
+    // setEnvelopeEnabled: null,
+    // envelopeEnabled: null,
     
     startPlayer : function() {
       Tone.context.resume()
@@ -64,6 +64,10 @@ const AudioContainer = () => {
 
     resetGrainPlayer : function(url) {
       var newBuffer = new Tone.ToneAudioBuffer(url, () => this.player.buffer = newBuffer)
+    },
+
+    resetGrainPlayerAndSampleDuration : function(url, setSampleDuration) {
+      var newBuffer = new Tone.ToneAudioBuffer(url, () => {this.player.buffer = newBuffer; setSampleDuration(this.player.buffer.duration)})
     },
 
     playA : function() {

@@ -5,19 +5,21 @@ import FetchedStems from './FetchedStems'
 import UploadForm from './UploadForm'
 
 const App = ({audioObject}) => {
-    const[envelopeEnabled, setEnvelopeEnabled] = useState(false)
+  // audioObject.setEnvelopeEnabled = setEnvelopeEnabled
+  // audioObject.envelopeEnabled = envelopeEnabled
+
+  // bind all methods of audioObject
+  for(let key in audioObject) {
+      if (typeof(audioObject[key]) == 'function') {
+          audioObject[key] = audioObject[key].bind(audioObject)
+      }
+  }    
+
+    // const[envelopeEnabled, setEnvelopeEnabled] = useState(false)
     const[uploadEnabled, setUploadEnabled] = useState(false)
     const[isPlaying, setIsPlaying] = useState(false)
-
-    audioObject.setEnvelopeEnabled = setEnvelopeEnabled
-    audioObject.envelopeEnabled = envelopeEnabled
-
-    // bind all methods of audioObject
-    for(let key in audioObject) {
-        if (typeof(audioObject[key]) == 'function') {
-            audioObject[key] = audioObject[key].bind(audioObject)
-        }
-    }    
+    const[currentlyPlaying, setCurrentlyPlaying] = useState('piano')
+    const[sampleDuration, setSampleDuration] = useState(audioObject.player.sampleTime)
 
     // const keys = (
     //   <>
@@ -48,13 +50,15 @@ const App = ({audioObject}) => {
           }
           <br />
           <br />
-          <h3>choose sample</h3>
-          <button onClick={() => setUploadEnabled(!uploadEnabled)}>{!uploadEnabled?"upload a sample":"select a sample"}</button>
+          <h3> currently playing : <button>{currentlyPlaying}</button></h3>
+          <h3>choose sample</h3> 
+          <FetchedStems audioObject={audioObject} setCurrentlyPlaying = {setCurrentlyPlaying} setSampleDuration={setSampleDuration}/>
+          <br />
+          <br />
+          <button onClick={() => setUploadEnabled(!uploadEnabled)}>{!uploadEnabled?"upload a sample":"collapse"}</button>
           {
-            uploadEnabled ? <UploadForm /> : <FetchedStems audioObject={audioObject} />
+            uploadEnabled ? <UploadForm /> : <br /> 
           }
-          <br />
-          <br />
           {/* <h3>{envelopeEnabled ? "turn off": "turn on"} envelope</h3>
           <button onClick={audioObject.toggleEnvelope} >_/\_</button>
           <br />
@@ -107,7 +111,7 @@ const App = ({audioObject}) => {
                   diam={80}
                   startVal={0}
                   min={0}
-                  max={10}
+                  max={sampleDuration}
                 />
                 <NewKnob 
                   text={'loop end'}
@@ -115,9 +119,9 @@ const App = ({audioObject}) => {
                   units={'s'}
                   onChange={(v) => {audioObject.player.loopEnd = v}}
                   diam={80}
-                  startVal={10}
+                  startVal={sampleDuration}
                   min={0}
-                  max={10}
+                  max={sampleDuration}
                 />
                 <NewKnob 
                   text={'filter cutoff'}

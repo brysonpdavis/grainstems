@@ -28,7 +28,7 @@ const UploadForm = () => {
             </p>
             <label>
                 <p>
-                    name of contributor : <input type="text" name="contributor" value={contributor} onChange={handleChange} ></input>
+                    contributor name : <input type="text" name="contributor" value={contributor} onChange={handleChange} ></input>
                 </p>
             </label>
             <label>

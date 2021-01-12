@@ -1,18 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 const NewKnob = (props) => {
     let {text, startVal, show, units, min, max, rotRange, pixelRange, startRotation, diam, color, lineColor, onChange} = props
 
-    // define defaults
-    // if (value === undefined) value = 0
-    // if (min === undefined) min = 0
-    // if (max === undefined) max = 100
-    // if (rotRange === undefined) rotRange = Math.PI * 2 * 0.9
-    // if (pixelRange === undefined) pixelRange = 250
-    // if (startRotation === undefined) startRotation = -Math.PI * 0.9
-    // if (diam === undefined) diam = 250
-
     const [val, setVal] = useState(startVal)
+
+    useEffect(() => {
+        setVal(startVal)
+    }, [max, startVal])
 
     let valueRange = max - min
     let rotation = startRotation + (val - min) / valueRange * rotRange
@@ -63,19 +58,6 @@ const NewKnob = (props) => {
         marginRight: 'auto',
 
     }
-
-    // let knobShadowStyle = {
-    //     position: 'relative',
-    //     display: 'block',
-    //     width: `${diam.toString()}px`,
-    //     height: `${diam.toString()}px`,
-    //     borderRadius: '50%',
-    //     content: '',
-    //     boxShadow: `0 0 60px -20px ${lineColor}`,      
-    //     padding: '0px',
-    //     marginBottom: '-40%',
-    //     zIndex: '-1'
-    // }
 
     return (
         <td style={tdStyle}>
