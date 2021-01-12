@@ -38,7 +38,7 @@ const UploadForm = () => {
             </label>
             <label>
                 <p>
-                    file : <input type="file" name="_file" className="custom-file-input" onChange={handleChange} required></input>
+                    file : <input type="file" name="_file" className="custom-file-input" onChange={handleChange} accept="audio/*" required></input>
                 </p>
             </label>
             <button type="submit">upload</button>
