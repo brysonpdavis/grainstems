@@ -39,8 +39,6 @@ exports.handler = async (event, context) => {
 
         console.log('response', response)
     
-        if (error) return { statusCode: 500, body: JSON.stringify(error) }
-
         const {GraphQLClient, gql} = require('graphql-request')
 
         const client = new GraphQLClient('https://graphql.fauna.com/graphql',{
