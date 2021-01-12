@@ -30,54 +30,49 @@ exports.handler = async (event, context) => {
         Body: fileToUpload
     }
 
-    try {
-        var upload = new AWS.S3.ManagedUpload({
-            params: uploadParams
-        })    
+    var upload = new AWS.S3.ManagedUpload({
+        params: uploadParams
+    })    
 
-        var response = await upload.promise()
+    var response = await upload.promise()
 
-        console.log('response', response)
-    
-        const {GraphQLClient, gql} = require('graphql-request')
+    console.log('response', response)
 
-        const client = new GraphQLClient('https://graphql.fauna.com/graphql',{
-            headers: {
-                Authorization: `Bearer ${process.env.MY_FAUNA_KEY}`
-            }
-        })
+    const {GraphQLClient, gql} = require('graphql-request')
 
-        const mutation = gql`
-        mutation {
-            addStem(
-                name: $name
-                url: $url
-                description: $description
-                contributer: $contributer
-            ) {
-                name
-                url
-                description
-                contributer
-                id
-            }
+    const client = new GraphQLClient('https://graphql.fauna.com/graphql',{
+        headers: {
+            Authorization: `Bearer ${process.env.MY_FAUNA_KEY}`
         }
-        `
-        const variables = {
-            name: data._name,
-            url: response.Location,
-            description: data.description,
-            contributer: data.contributer
+    })
+
+    const mutation = gql`
+    mutation {
+        addStem(
+            name: $name
+            url: $url
+            description: $description
+            contributer: $contributer
+        ) {
+            name
+            url
+            description
+            contributer
+            id
         }
-
-        const gqlResponse = await client.request(mutation, variables)
-
-        console.log('gql response : ', gqlResponse)
-        console.log('stringified : ', JSON.stringify(gqlResponse))
-
-        return { statusCode: 200, body: JSON.stringify(gqlResponse) }
-
-    } catch (e) {
-        return { statusCode: 500, body: e.message }
     }
+    `
+    const variables = {
+        name: data._name,
+        url: response.Location,
+        description: data.description,
+        contributer: data.contributer
+    }
+
+    const gqlResponse = await client.request(mutation, variables)
+
+    console.log('gql response : ', gqlResponse)
+    console.log('stringified : ', JSON.stringify(gqlResponse))
+
+    return { statusCode: 200, body: JSON.stringify(gqlResponse) }
 }
