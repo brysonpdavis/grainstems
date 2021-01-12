@@ -15,13 +15,9 @@ exports.handler = async (event, context) => {
     const url = data._file.url
     const AWSFileKey = `${Math.floor(Math.random() * 10000000).toString()}-${fileName}`
     const fetched = await fetch(url)
-    console.log('fetched', fetched)
-    // const response = await fetched.json()
-    // console.log('response', response.toString())
     const blob = await fetched.blob()
     const arrayBufferBlob = await blob.arrayBuffer()
     const fileToUpload = Buffer.from(arrayBufferBlob)
-    // console.log(fileToUpload.toString())
         
     const uploadParams = {
         Bucket: 'grainstems', 
@@ -35,8 +31,6 @@ exports.handler = async (event, context) => {
     })    
 
     var response = await upload.promise()
-
-    console.log('response', response)
 
     const {GraphQLClient, gql} = require('graphql-request')
 
@@ -66,7 +60,7 @@ exports.handler = async (event, context) => {
         name: data._name,
         url: response.Location,
         description: data.description,
-        contributer: data.contributer
+        contributer: data.contributor
     }
 
     const gqlResponse = await client.request(mutation, variables)
