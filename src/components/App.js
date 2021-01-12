@@ -19,20 +19,20 @@ const App = ({audioObject}) => {
         }
     }    
 
-    const keys = (
-      <>
-      <h3>play synth with buttons</h3>
-      <div>
-        <button onClick={audioObject.playA}>A</button>
-        <button onClick={audioObject.playB}>B</button>
-        <button onClick={audioObject.playC}>C</button>
-        <button onClick={audioObject.playD}>D</button>
-        <button onClick={audioObject.playE}>E</button>
-        <button onClick={audioObject.playF}>F</button>
-        <button onClick={audioObject.playG}>G</button>
-      </div>
-      </>
-    )
+    // const keys = (
+    //   <>
+    //   <h3>play synth with buttons</h3>
+    //   <div>
+    //     <button onClick={audioObject.playA}>A</button>
+    //     <button onClick={audioObject.playB}>B</button>
+    //     <button onClick={audioObject.playC}>C</button>
+    //     <button onClick={audioObject.playD}>D</button>
+    //     <button onClick={audioObject.playE}>E</button>
+    //     <button onClick={audioObject.playF}>F</button>
+    //     <button onClick={audioObject.playG}>G</button>
+    //   </div>
+    //   </>
+    // )
 
     return (
         <Paper elevation={4} style={{backgroundColor: '#383838', padding: '40px 80px 80px 80px'}}>
