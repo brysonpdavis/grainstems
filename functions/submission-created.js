@@ -8,11 +8,7 @@ exports.handler = async (event, context) => {
             IdentityPoolId: process.env.MY_AWS_COGNITO_ID
         })
     })
-    
-    // const s3 = new AWS.S3({
-    //     params: { Bucket: 'grainstems' }
-    // })
-    
+        
     const data = JSON.parse(event.body).payload.data
     const fileName = data._file.filename
     const fileType = data._file.type
@@ -45,9 +41,43 @@ exports.handler = async (event, context) => {
     
         if (error) return { statusCode: 500, body: JSON.stringify(error) }
 
-        // ADD FAUNADB MUTATION HERE
+        const {GraphQLClient, gql} = require('graphql-request')
 
-    return { statusCode: 200, body: JSON.stringify(result) }
+        const client = new GraphQLClient('https://graphql.fauna.com/graphql',{
+            headers: {
+                Authorization: `Bearer ${process.env.MY_FAUNA_KEY}`
+            }
+        })
+
+        const mutation = gql`
+        mutation {
+            addStem(
+                name: $name
+                url: $url
+                description: $description
+                contributer: $contributer
+            ) {
+                name
+                url
+                description
+                contributer
+                id
+            }
+        }
+        `
+        const variables = {
+            name: data._name,
+            url: response.Location,
+            description: data.description,
+            contributer: data.contributer
+        }
+
+        const gqlResponse = await client.request(mutation, variables)
+
+        console.log('gql response : ', gqlResponse)
+        console.log('stringified : ', JSON.stringify(gqlResponse))
+
+        return { statusCode: 200, body: JSON.stringify(gqlResponse) }
 
     } catch (e) {
         return { statusCode: 500, body: e.message }

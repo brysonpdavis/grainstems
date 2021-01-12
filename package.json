@@ -13,6 +13,7 @@
     "d3-selection": "^2.0.0",
     "faunadb": "^4.0.0",
     "graphql": "^15.4.0",
+    "graphql-request": "^3.4.0",
     "nexusui": "^2.1.6",
     "node-fetch": "^2.6.1",
     "react": "^17.0.1",
