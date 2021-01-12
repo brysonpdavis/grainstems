@@ -8,6 +8,8 @@ exports.handler = async (event, context) => {
             IdentityPoolId: process.env.MY_AWS_COGNITO_ID
         })
     })
+
+    console.log('1')
         
     const data = JSON.parse(event.body).payload.data
     const fileName = data._file.filename
@@ -30,7 +32,11 @@ exports.handler = async (event, context) => {
         params: uploadParams
     })    
 
+    console.log('2')
+
     var response = await upload.promise()
+
+    console.log('3')
 
     const {GraphQLClient, gql} = require('graphql-request')
 
@@ -62,6 +68,8 @@ exports.handler = async (event, context) => {
         description: data.description,
         contributer: data.contributor
     }
+
+    console.log('4')
 
     const gqlResponse = await client.request(mutation, variables)
 
