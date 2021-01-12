@@ -55,11 +55,11 @@ const App = ({audioObject}) => {
           }
           <br />
           <br />
-          <h3>{envelopeEnabled ? "turn off": "turn on"} envelope</h3>
+          {/* <h3>{envelopeEnabled ? "turn off": "turn on"} envelope</h3>
           <button onClick={audioObject.toggleEnvelope} >_/\_</button>
           <br />
           <br />
-          {envelopeEnabled ? keys : null}
+          {envelopeEnabled ? keys : null} */}
           <table>
             <tbody>
               <tr>
