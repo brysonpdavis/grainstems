@@ -47,7 +47,7 @@ exports.handler = async (event, context) => {
     })
 
     const mutation = gql`
-    mutation {
+    mutation AddStem($name: String!, $url: String!, $description:String, $contributer:String) {
         addStem(
             name: $name
             url: $url
