@@ -67,7 +67,12 @@ const AudioContainer = () => {
     },
 
     resetGrainPlayerAndSampleDuration : function(url, setSampleDuration) {
-      var newBuffer = new Tone.ToneAudioBuffer(url, () => {this.player.buffer = newBuffer; setSampleDuration(this.player.buffer.duration)})
+      var newBuffer = new Tone.ToneAudioBuffer(url, () => {
+        this.player.buffer = newBuffer 
+        this.player.loopStart = 0
+        this.player.loopEnd = this.player.buffer.duration
+        setSampleDuration(this.player.buffer.duration)
+      })
     },
 
     playA : function() {
