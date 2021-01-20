@@ -125,13 +125,13 @@ const App = ({audioObject}) => {
                 />
                 <NewKnob 
                   text={'filter cutoff'}
-                  show={v => Math.floor(2 ** (v + 5))}
+                  show={v => Math.floor(2 ** v)}
                   units={'Hz'}
-                  onChange={(v) => {audioObject.filter.frequency.rampTo(2 ** (v + 5))}}
+                  onChange={(v) => {audioObject.filter.frequency.rampTo(2 ** v)}}
                   diam={80}
-                  startVal={10}
-                  min={0}
-                  max={10}
+                  startVal={14.28778}
+                  min={5}
+                  max={14.28778}
                 />
                 <NewKnob 
                   text={'sample speed'}
