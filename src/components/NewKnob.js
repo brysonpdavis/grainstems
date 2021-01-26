@@ -38,7 +38,7 @@ const NewKnob = (props) => {
 
     let tdStyle = {
         padding: '16px 0 16px 0',
-        width: `${diam * 2}px`,
+        minWidth: `${diam * 2}px`,
         position: 'relative'
 
     }

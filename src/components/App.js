@@ -43,7 +43,7 @@ const App = ({audioObject, frequencyBandArray}) => {
     // )
 
     return (
-        <Paper elevation={4} style={{backgroundColor: '#383838', padding: '40px 80px 80px 80px'}}>
+        <Paper elevation={4} style={{backgroundColor: '#383838', padding: '40px 80px 80px 80px', margin: '8px'}}>
         <div className={'interface'}>
           <Grid container xs={12} spacing={0}>
             <Grid item xs={4}>

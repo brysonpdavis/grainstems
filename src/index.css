@@ -23,10 +23,6 @@ p {
     font-size: small;
 }
 
-body {
-    background-color: #333;
-    user-select: none;
-}
 
 input, textarea {
     background: black;
@@ -40,7 +36,7 @@ input, textarea {
 
 .interface {
     text-align: left;
-    min-width: 600px;
+    width: 750px;
 }
 
 button {
@@ -55,6 +51,18 @@ button {
 #root {
     display: flex;
     justify-content: center;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+body {
+    background-color: #333;
+    user-select: none;
+    margin: 0;
 }
 
 .title {
