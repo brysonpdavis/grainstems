@@ -2,20 +2,20 @@ import React, {useState} from 'react'
 
 const UploadForm = () => {
     const [_name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [contributor, setContributor] = useState('')
+    // const [description, setDescription] = useState('')
+    // const [contributor, setContributor] = useState('')
 
     const handleChange = e => {
         const {name, value} = e.target
         if (name === '_name'){
             return setName(value)
         }
-        if (name === 'description'){
-            return setDescription(value)
-        }
-        if (name === 'contributor'){
-            return setContributor(value)
-        }
+        // if (name === 'description'){
+        //     return setDescription(value)
+        // }
+        // if (name === 'contributor'){
+        //     return setContributor(value)
+        // }
     }
 
     return (
