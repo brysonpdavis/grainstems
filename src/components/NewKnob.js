@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
+import DarkTooltip from './DarkTooltip'
 
 const NewKnob = (props) => {
-    let {text, startVal, show, units, min, max, rotRange, pixelRange, startRotation, diam, color, lineColor, onChange} = props
+    let {text, tooltip, startVal, show, units, min, max, rotRange, pixelRange, startRotation, diam, color, lineColor, onChange} = props
 
     const [val, setVal] = useState(startVal)
 
@@ -61,7 +62,9 @@ const NewKnob = (props) => {
 
     return (
         <td style={tdStyle}>
-            <h3>{text}</h3> 
+            <DarkTooltip arrow title={tooltip} placement='top-start'>
+                <h3>{text}</h3> 
+            </DarkTooltip>
             <h3> {show(val)} {units}</h3>
             <div style={knobStyle} onPointerDown={pointerDown}>
                 <svg overflow='visible' width={diam} height={diam}>
@@ -98,6 +101,7 @@ const NewKnob = (props) => {
 
 NewKnob.defaultProps = {
     text: '',
+    tooltip: 'hover',
     startVal: 0,
     min: 0,
     max: 100,

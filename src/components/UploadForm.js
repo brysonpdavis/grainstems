@@ -23,22 +23,30 @@ const UploadForm = () => {
             <input type="hidden" name="form-name" value="upload" />
             <p>
                 <label>
-                    sample name : <input type="text" name="_name" value={_name} onChange={handleChange} required/>
+                    sample name : 
+                    <br />
+                    <input type="text" name="_name" value={_name} onChange={handleChange} required/>
                 </label>
             </p>
-            <label>
+            {/* <label>
                 <p>
-                    contributor name : <input type="text" name="contributor" value={contributor} onChange={handleChange} ></input>
+                    contributor name : 
+                    <br />
+                    <input type="text" name="contributor" value={contributor} onChange={handleChange} ></input>
                 </p>
             </label>
             <label>
                 <p>
-                    description : <input type="text" name="description" value={description} onChange={handleChange} />
+                    description : 
+                    <br />
+                    <input type="text" name="description" value={description} onChange={handleChange} />
                 </p>
-            </label>
+            </label> */}
             <label>
                 <p>
-                    file : <input type="file" name="_file" className="custom-file-input" onChange={handleChange} accept="audio/*" required></input>
+                    file : 
+                    <br />
+                    <input type="file" name="_file" className="custom-file-input" onChange={handleChange} accept="audio/*" required></input>
                 </p>
             </label>
             <button type="submit">upload</button>

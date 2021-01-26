@@ -6,8 +6,9 @@ const useStyles = makeStyles(theme => ({
     flexContainer: {
         display: 'flex', 
         justifyContent: 'center', 
-        paddingTop: '50%',
-        height: '400px'
+        height: '180px',
+        alignItems: 'flex-end',
+        overflow: 'hidden',
     }
 }))
 

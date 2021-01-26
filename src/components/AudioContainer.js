@@ -3,7 +3,6 @@ import drums from '../stems/drums1.wav'
 import React, {useState} from 'react'
 import setupTone from '../services/setupTone'
 import App from './App'
-import Visualizer from './Visualizer'
 
 const AudioContainer = () => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -124,16 +123,12 @@ const AudioContainer = () => {
     }
   };
 
-  let frequencyBandArray = [...Array(128).keys()]
+  let frequencyBandArray = [...Array(64).keys()]
 
   return (
-    <span>
-      <App audioObject={audioObj} />
-      <Visualizer 
-        audioObject={audioObj}  
-        frequencyBandArray={frequencyBandArray}
-      />
-    </span>)
+    <>
+      <App audioObject={audioObj} frequencyBandArray={frequencyBandArray} />
+    </>)
 
 }
 
