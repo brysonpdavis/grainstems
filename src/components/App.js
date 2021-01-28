@@ -8,8 +8,6 @@ import DarkTooltip from './DarkTooltip'
 import '../index.css'
 
 const App = ({audioObject, frequencyBandArray}) => {
-  // audioObject.setEnvelopeEnabled = setEnvelopeEnabled
-  // audioObject.envelopeEnabled = envelopeEnabled
 
   // bind all methods of audioObject
   for(let key in audioObject) {
@@ -18,7 +16,6 @@ const App = ({audioObject, frequencyBandArray}) => {
       }
   }    
 
-    // const[envelopeEnabled, setEnvelopeEnabled] = useState(false)
     const[uploadEnabled, setUploadEnabled] = useState(false)
     const[isPlaying, setIsPlaying] = useState(false)
     const[currentlyPlaying, setCurrentlyPlaying] = useState('drum loop 1')
@@ -27,21 +24,6 @@ const App = ({audioObject, frequencyBandArray}) => {
     const[showInfo, setShowInfo] = useState(false)
 
     const activeButtonStyle = {borderColor: '#c0f3fc', boxShadow: '0px 0px 60px -5px'}
-
-    // const keys = (
-    //   <>
-    //   <h3>play synth with buttons</h3>
-    //   <div>
-    //     <button onClick={audioObject.playA}>A</button>
-    //     <button onClick={audioObject.playB}>B</button>
-    //     <button onClick={audioObject.playC}>C</button>
-    //     <button onClick={audioObject.playD}>D</button>
-    //     <button onClick={audioObject.playE}>E</button>
-    //     <button onClick={audioObject.playF}>F</button>
-    //     <button onClick={audioObject.playG}>G</button>
-    //   </div>
-    //   </>
-    // )
 
     return (
         <Paper elevation={4} className={'interface-container'} style={{backgroundColor: '#383838'}}>
@@ -98,11 +80,6 @@ const App = ({audioObject, frequencyBandArray}) => {
           <FetchedStems audioObject={audioObject} setCurrentlyPlaying = {setCurrentlyPlaying} setSampleDuration={setSampleDuration}/>
           <br />
           <br />
-          {/* <h3>{envelopeEnabled ? "turn off": "turn on"} envelope</h3>
-          <button onClick={audioObject.toggleEnvelope} >_/\_</button>
-          <br />
-          <br />
-          {envelopeEnabled ? keys : null} */}
           <table>
             <tbody>
               <tr>
@@ -142,7 +119,7 @@ const App = ({audioObject, frequencyBandArray}) => {
                   max={3600}
                 />
                 <td>
-                  <DarkTooltip arrow placement={'top-start'} title={'reverses playthrough of the sample selection'}>
+                  <DarkTooltip arrow placement={'top-start'} title={'reverses playthrough of the sample selection.'}>
                     <h3>reverse</h3>
                   </DarkTooltip>
                   <button onClick={() => {audioObject.setReverse(); setReversed(!reversed)}} className={'reverse-button'} style={reversed ? activeButtonStyle : {} } >~</button>

@@ -123,6 +123,7 @@ li {
     font-family: Digital;
     margin-top: 0px;
     font-size: 1.5em;
+    line-height: 1;
 }
 
 .reverse-button {
@@ -132,4 +133,11 @@ li {
     width: 50%
 }
 
+.vis-container {
+    display: flex;
+    justify-content: center;
+    height: 180px;
+    align-items: flex-end;
+    overflow: hidden;
+}
   
