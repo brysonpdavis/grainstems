@@ -2,6 +2,8 @@ import React, {useRef} from 'react'
 import {Paper} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
+const isVisible = (v) => v ? 'visible':'hidden'
+
 const useStyles = makeStyles(theme => ({
     flexContainer: {
         display: 'flex', 
@@ -9,10 +11,11 @@ const useStyles = makeStyles(theme => ({
         height: '180px',
         alignItems: 'flex-end',
         overflow: 'hidden',
+        visibility: isVisible()
     }
 }))
 
-const Visualizer = ({audioObject, frequencyBandArray}) => {
+const Visualizer = ({audioObject, frequencyBandArray, visible}) => {
     const classes = useStyles()
 
     for(let key in audioObject) {
@@ -55,7 +58,7 @@ const Visualizer = ({audioObject, frequencyBandArray}) => {
     handleStartButtonClick()
 
     return (
-        <div className={classes.flexContainer}>
+        <div className={classes.flexContainer} style={{visibility: isVisible(visible), height: (visible ? 'calc(100% - 6em)': '0')}}>
             {frequencyBandArray.map((num) => 
                 <Paper
                     className={'frequencyBands'}

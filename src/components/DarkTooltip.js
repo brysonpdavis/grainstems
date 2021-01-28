@@ -9,7 +9,8 @@ const DarkTooltip = withStyles((theme) => ({
         backgroundColor: 'black',
         fontSize: '1em',
         fontWeight: '100',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        padding: '1.5em'
     }
   }))(Tooltip)
 

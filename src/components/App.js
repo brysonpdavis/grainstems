@@ -24,8 +24,9 @@ const App = ({audioObject, frequencyBandArray}) => {
     const[currentlyPlaying, setCurrentlyPlaying] = useState('drum loop 1')
     const[sampleDuration, setSampleDuration] = useState(audioObject.player.sampleTime)
     const[reversed, setReversed] = useState(false)
+    const[showInfo, setShowInfo] = useState(false)
 
-    const reversedStyle = {borderColor: '#c0f3fc', boxShadow: '0px 0px 60px -5px'}
+    const activeButtonStyle = {borderColor: '#c0f3fc', boxShadow: '0px 0px 60px -5px'}
 
     // const keys = (
     //   <>
@@ -49,15 +50,16 @@ const App = ({audioObject, frequencyBandArray}) => {
             <Grid item xs={4}>
               <div>
                 <h2 className={"title"}>grainstems</h2>
-                <h3 className={"subtitle"}>a toy granular synth</h3>
+                <h3 className={"subtitle"}>a toy granular synth</h3> 
                 {
                   !isPlaying 
                   ? 
                   <button disabled={!audioObject.isLoaded} onClick={() => {audioObject.startPlayer(); if (audioObject.player.state === 'started') setIsPlaying(true)}}>start</button>
                   :
-                  <button onClick={() => {audioObject.stopPlayer(); setIsPlaying(false)}}>stop</button>
+                  <button onClick={() => {audioObject.stopPlayer(); setIsPlaying(false)}} style={activeButtonStyle}>stop</button>
                 }
-                <button onClick={() => setUploadEnabled(!uploadEnabled)}>{!uploadEnabled?"upload a sample":"collapse"}</button>
+                <button onClick={() => setShowInfo(!showInfo)} style={showInfo ? activeButtonStyle : {}}>{' \u24d8'}</button>
+                <button onClick={() => setUploadEnabled(!uploadEnabled)} style={uploadEnabled ? activeButtonStyle : {}}>{!uploadEnabled?"upload a sample":"collapse"}</button>
                 <Collapse in={uploadEnabled}>
                   <UploadForm />
                 </Collapse>
@@ -65,12 +67,30 @@ const App = ({audioObject, frequencyBandArray}) => {
 
             </Grid>
             <Grid item xs={8} className={'screen'}>
-                <p className={'screen-text'}>current sample:</p>
-                <p className={'screen-text'}>{currentlyPlaying}</p>
+              {
+                showInfo 
+                ?
+                <>
+                  <p className={'screen-text'}>welcome to grainstems!</p>
+                  <p className={'screen-text'}>
+                    grainstems is a granular synthesizer, meaning it manipulates audio samples into interesting new sounds. 
+                    to get started, choose a sample from below and press start. 
+                    mouse over any parameter name for a brief description of what it does, and 
+                    if you would like to share a sample of your own for granularization, feel free to upload one for others to use.
+                    have fun experimenting!
+                  </p>
+                </>
+                :
+                <>
+                  <p className={'screen-text'}>current sample:</p>
+                  <p className={'screen-text'}>{currentlyPlaying}</p>
+                </>
+              }
                 <Visualizer
+                  visible={!showInfo}
                   audioObject={audioObject}
                   frequencyBandArray={frequencyBandArray}
-                 />
+                />
             </Grid>
           </Grid>
 
@@ -125,7 +145,7 @@ const App = ({audioObject, frequencyBandArray}) => {
                   <DarkTooltip arrow placement={'top-start'} title={'reverses playthrough of the sample selection'}>
                     <h3>reverse</h3>
                   </DarkTooltip>
-                  <button onClick={() => {audioObject.setReverse(); setReversed(!reversed)}} className={'reverse-button'} style={reversed ? reversedStyle : {} } >~</button>
+                  <button onClick={() => {audioObject.setReverse(); setReversed(!reversed)}} className={'reverse-button'} style={reversed ? activeButtonStyle : {} } >~</button>
                 </td>
               </tr>
               <tr>
