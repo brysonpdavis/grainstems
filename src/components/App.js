@@ -32,7 +32,8 @@ const App = ({audioObject, frequencyBandArray}) => {
             <Grid item xs={4}>
               <div>
                 <h2 className={"title"}>grainstems</h2>
-                <h3 className={"subtitle"}>a toy granular synth</h3> 
+                <h3 className={"subtitle"}>a toy granular synth <button onClick={() => setShowInfo(!showInfo)} style={showInfo ? activeButtonStyle : {}}>{' \u24d8'}</button></h3>
+
                 {
                   !isPlaying 
                   ? 
@@ -40,13 +41,11 @@ const App = ({audioObject, frequencyBandArray}) => {
                   :
                   <button onClick={() => {audioObject.stopPlayer(); setIsPlaying(false)}} style={activeButtonStyle}>stop</button>
                 }
-                <button onClick={() => setShowInfo(!showInfo)} style={showInfo ? activeButtonStyle : {}}>{' \u24d8'}</button>
                 <button onClick={() => setUploadEnabled(!uploadEnabled)} style={uploadEnabled ? activeButtonStyle : {}}>{!uploadEnabled?"upload a sample":"collapse"}</button>
                 <Collapse in={uploadEnabled}>
                   <UploadForm />
                 </Collapse>
               </div>
-
             </Grid>
             <Grid item xs={8} className={'screen'}>
               {
@@ -75,7 +74,6 @@ const App = ({audioObject, frequencyBandArray}) => {
                 />
             </Grid>
           </Grid>
-
           <h3>choose sample</h3> 
           <FetchedStems audioObject={audioObject} setCurrentlyPlaying = {setCurrentlyPlaying} setSampleDuration={setSampleDuration}/>
           <br />
@@ -110,7 +108,7 @@ const App = ({audioObject, frequencyBandArray}) => {
                 <NewKnob 
                   text={'tuning'}
                   tooltip={'adjusts the tuning of the granularized sample relative to the original. 12 semitones is an octave and 7 semitones is a perfect fifth.'}
-                  show={v => Math.floor(v) / 100}
+                  show={v => Math.floor(v / 10) / 10}
                   units={'semitones'}
                   onChange={(v) => {audioObject.player.detune = v}}
                   diam={80}
